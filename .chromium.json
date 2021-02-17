@@ -1,0 +1,23 @@
+{
+  "release_name": "chromium",
+  "manifest": "./src/manifest.json",
+  "assets": "./assets/img/*",
+  "js_bundles": [
+    {
+      "name": "content",
+      "src": "./src/content.js"
+    },
+    {
+      "name": "options",
+      "src": "./src/options.js"
+    },
+    {
+      "name": "help",
+      "src": "./src/help.js"
+    },
+    {
+      "name": "background",
+      "src": "./src/background.js"
+    }
+  ]
+}

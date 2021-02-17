@@ -1,0 +1,40 @@
+{
+  "name": "doucheblock-for-twitter",
+  "description": "Automatically block anyone with specific keywords in their Twitter bio.",
+  "version": "1.2.0",
+  "homepage": "https://github.com/MobileFirstLLC/doucheblock",
+  "author": "Mobile First LLC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MobileFirstLLC/doucheblock"
+  },
+  "scripts": {
+    "start": "xt-build -e dev -c .chromium.json -p chrome -w",
+    "start:ff": "xt-build -e dev -c .firefox.json -p firefox -w",
+    "start:safari": "npm run build:safari -- -w",
+    "build": "xt-build -e prod -c .chromium.json -p chrome",
+    "build:ff": "xt-build -e prod -c .firefox.json -p firefox",
+    "build:safari": "xt-build -e prod -c .chromium.json -p chrome",
+    "docs": "xt-docs -c docs/config.json",
+    "sync": "xt-sync",
+    "test": "xt-test",
+    "clean": "xt-clean"
+  },
+  "standard-version": {
+    "infile": "docs/pages/changelog.md"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintIgnore": [
+    "test/**/*"
+  ],
+  "devDependencies": {
+    "cws-publish": "^2.0.5",
+    "extension-cli": "^1.2.0",
+    "foodoc": "^0.0.9",
+    "web-ext-submit": "^6.2.0"
+  }
+}
