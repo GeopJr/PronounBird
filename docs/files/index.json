@@ -1,0 +1,18 @@
+{
+  "changelog": {
+    "title": "Version History",
+    "summary": "Changelog and release notes"
+  },
+  "dev_guide": {
+    "title": "Developer Guide",
+    "summary": "How to build and extend DoucheBlock locally."
+  },
+  "presskit": {
+    "title": "Press Kit",
+    "summary": "Images of DoucheBlock for Twitter."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "summary": "TL;DR DoucheBlock respects your privacy."
+  }
+}
