@@ -26,6 +26,6 @@
     "test/**/*"
   ],
   "devDependencies": {
-    "extension-cli": "^1.2.0"
+    "extension-cli": "1.2.0"
   }
 }
