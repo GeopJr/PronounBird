@@ -1,5 +1,4 @@
 import TwitterApi from '../src/modules/twitterApi';
-import Storage from '../src/modules/storage';
 import {MockXHR} from './_mocks';
 import {defaultConfig} from '../src/config';
 
@@ -34,23 +33,4 @@ describe('Twitter API', () => {
                 done();
             });
     });
-
-    it('Detects previously blocked', done => {
-        TwitterApi.isBlocking('AsoboStudio', bearer, csrf,
-            status => {
-                expect(status).to.be.true;
-                done();
-            });
-    });
-
-    it('Increments count on block', done => {
-        sandbox.spy(Storage, 'incrementCount');
-        expect(Storage.incrementCount.calledOnce).to.be.false;
-        TwitterApi.doTheBlock('xyz', bearer, csrf);
-        setTimeout(_ => {
-            expect(Storage.incrementCount.calledOnce).to.be.true;
-            done();
-        }, 1);
-    });
-
 });
