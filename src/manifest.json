@@ -41,9 +41,10 @@
     "incognito": "split"
   },
   "firefox": {
-    "applications": {
+    "browser_specific_settings": {
       "gecko": {
-        "strict_min_version": "42.0"
+        "strict_min_version": "65.0",
+        "id": "{a5b8143b-47f9-4ae4-9b63-41885b4dceb9}"
       }
     },
     "incognito": "spanning"
