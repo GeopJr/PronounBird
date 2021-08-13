@@ -36,7 +36,7 @@ To avoid *only one joke*, all (neo)pronouns are hardcoded. They are located insi
 ## Contributing
 
 1. Read the [Code of Conduct](https://github.com/GeopJr/.github/blob/main/CODE_OF_CONDUCT.md)
-2. Fork it ( https://github.com/GeopJr/SveltePress/fork )
+2. Fork it ( https://github.com/GeopJr/PronounBird/fork )
 3. Create your feature branch (git checkout -b my-new-feature)
 4. Commit your changes (git commit -am 'Add some feature')
 5. Push to the branch (git push origin my-new-feature)
