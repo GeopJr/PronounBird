@@ -13,15 +13,11 @@
 
 ## What is PronounBird?
 
-#
-
 PronounBird is a browser extension for Twitter that automatically parses user bios for their pronouns and displays them anywhere they are mentioned saving you the trouble of visiting their profile or hovering over them just to find them.
 
 #
 
 ## Screenshots
-
-#
 
 <p align="center">
   <img src="https://i.imgur.com/63Cgd4c.png" alt="Screenshot showing PronounBird having appended the user's pronouns on a post" /><br/>
@@ -32,15 +28,11 @@ PronounBird is a browser extension for Twitter that automatically parses user bi
 
 ## My pronouns are missing
 
-#
-
-To avoid *only one joke*, all (neo)pronouns are hardcoded. They are located inside `src/config.js`. Feel free to add your own by opening a PR, commenting on the [first issue](https://github.com/GeopJr/PronounBird/issues/1) or messaging me on any social media (you can find them on my profile readme or on [my website](https://geopjr.dev/contact)).
+To avoid *only one joke*, all (neo)pronouns are hardcoded. They are located inside `src/config.js`. Feel free to add your own by opening a PR, commenting on the [first issue](https://github.com/GeopJr/PronounBird/issues/3) or messaging me on any social media (you can find them on my profile readme or on [my website](https://geopjr.dev/contact)).
 
 #
 
 ## Contributing
-
-#
 
 1. Read the [Code of Conduct](https://github.com/GeopJr/.github/blob/main/CODE_OF_CONDUCT.md)
 2. Fork it ( https://github.com/GeopJr/SveltePress/fork )
@@ -52,8 +44,6 @@ To avoid *only one joke*, all (neo)pronouns are hardcoded. They are located insi
 #
 
 ## Credits
-
-#
 
 This is a fork of [doucheblock](https://github.com/MobileFirstLLC/doucheblock), give it a try!
 
