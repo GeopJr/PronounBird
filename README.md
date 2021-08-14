@@ -11,6 +11,13 @@
 
 #
 
+<p align="center">
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/pronounbird-for-twitter/"><img src="https://i.imgur.com/UkbNoME.png" alt="firefox addon" /></a>
+    <a href="https://chrome.google.com/webstore/detail/pronounbird-for-twitter/pfmmodpkbmpchmhglidbncgoanclbkgj"><img src="https://i.imgur.com/TSTwptM.png" alt="chromium addon" /></a>
+</p>
+
+#
+
 ## What is PronounBird?
 
 PronounBird is a browser extension for Twitter that automatically parses user bios for their pronouns and displays them anywhere they are mentioned saving you the trouble of visiting their profile or hovering over them just to find them.
