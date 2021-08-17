@@ -302,4 +302,5 @@ export const presetPronouns = [
   "it/any/she/they",
   "it/any/they/he",
   "it/any/they/she",
+  "he/vae"
 ];
