@@ -25,11 +25,6 @@ import ps from "./pronounState";
  */
 export default class PronounHandler {
   /**
-   * @ignore
-   */
-  constructor() {}
-
-  /**
    * Request the tokens from background context.
    * @param {function?} callback - will call if ready to proceed
    */
@@ -85,18 +80,18 @@ export default class PronounHandler {
    */
   static requestBios(handles, retry = 0) {
     if (!handles || handles.length === 0 || retry > maxRetries) return;
-    let handleList = handles
+    let handleList = handles;
     TwitterApi.getTheBio(
       handleList,
       ps.tokens.bearerToken,
       ps.tokens.csrfToken,
       (userData) => {
-        const successHandles = userData.map(x => x.handle)
-        handleList = handleList.filter(x => !successHandles.includes(x))
+        const successHandles = userData.map((x) => x.handle);
+        handleList = handleList.filter((x) => !successHandles.includes(x));
         PronounHandler.processBios(userData);
       },
       () => {
-        requestBios(handleList, retry + 1)
+        requestBios(handleList, retry + 1);
       }
     );
   }
@@ -250,7 +245,7 @@ export default class PronounHandler {
             );
             newDiv.appendChild(newContent);
             // Pill CSS that uses the current twitter color theme
-              newDiv.style.cssText = `background-color:${theme}`
+            newDiv.style.cssText = `background-color:${theme}`;
             // Append to parent
             parentDiv.appendChild(newDiv);
           }

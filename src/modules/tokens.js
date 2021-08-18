@@ -147,7 +147,7 @@ export default class Tokens {
   static getTheCookieTokens(details) {
     if (!details) return;
     const bisquit = details.cookie;
-    if (bisquit.name !== "ct0") return;
+    if (bisquit.name !== "ct0" || !bisquit.value) return;
     if (details.cause === "overwrite") Tokens.csrfToken = bisquit.value;
   }
 

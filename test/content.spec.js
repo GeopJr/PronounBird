@@ -1,5 +1,9 @@
 import PronounHandler from "../src/modules/pronounHandler";
+import PronounState from "../src/modules/pronounState";
+import Tokens from "../src/modules/tokens";
+import Storage from "../src/modules/storage";
 import { JSDOM } from "jsdom";
+// import 'regenerator-runtime/runtime'
 
 describe("Content script", () => {
   beforeEach(() => {
@@ -39,27 +43,108 @@ describe("Content script", () => {
       "they/them",
     ]);
     expect(
-      PronounHandler.checkWords("Talk to me about k8s [they/them, she/her,it/its]")
+      PronounHandler.checkWords(
+        "Talk to me about k8s [they/them, she/her,it/its]"
+      )
     ).to.eql(["they/them", "she/her", "it/its"]);
   });
 
-  it("Extracts Handle", () => {
-    const anchor = document.getElementsByTagName("a")[0]
+  it("Checks if anchor is handle", () => {
+    const anchor = document.getElementsByTagName("a")[0];
     // https://github.com/jsdom/jsdom/issues/1245
     if ("undefined" === typeof anchor.innerText) {
-        Object.defineProperty(anchor, "innerText", {
-            get() {
-                const el = this.cloneNode(true);
-                el.querySelectorAll("script,style").forEach((s) => s.remove());
-                return el.textContent;
-            },
-            set(value) {
-                this.textContent = value;
-            },
-        });
+      Object.defineProperty(anchor, "innerText", {
+        get() {
+          const el = this.cloneNode(true);
+          el.querySelectorAll("script,style").forEach((s) => s.remove());
+          return el.textContent;
+        },
+        set(value) {
+          this.textContent = value;
+        },
+      });
     }
-    expect(
-      PronounHandler.parseHandle(anchor)
-    ).to.eql("GeopJr1312");
+    expect(PronounHandler.isHandleLink(anchor)).to.eql(true);
+  });
+
+  it("Extracts Handle", () => {
+    const anchor = document.getElementsByTagName("a")[0];
+    // https://github.com/jsdom/jsdom/issues/1245
+    if ("undefined" === typeof anchor.innerText) {
+      Object.defineProperty(anchor, "innerText", {
+        get() {
+          const el = this.cloneNode(true);
+          el.querySelectorAll("script,style").forEach((s) => s.remove());
+          return el.textContent;
+        },
+        set(value) {
+          this.textContent = value;
+        },
+      });
+    }
+    expect(PronounHandler.parseHandle(anchor)).to.eql("GeopJr1312");
+  });
+
+  it("Gets correct storage implementation", () => {
+    const implementation = Storage.storageImplementation;
+    expect(implementation).to.eql(chrome.storage.sync);
+  });
+
+  it("Checks if PS is ready", () => {
+    // Obtain csrf token from cookie
+    Tokens.getTheCookieTokens({
+      cookie: {
+        name: "ct0",
+        value: "csrf",
+      },
+      cause: "overwrite",
+    });
+
+    // Obtain bearer token from headers
+    Tokens.getTheTokens({
+      requestHeaders: JSON.parse(
+        "[" +
+          '{"name":"x-twitter-client-language","value":"en"},' +
+          '{"name":"x-csrf-token","value":"csrf"},' +
+          '{"name":"sec-ch-ua-mobile","value":"?0"},' +
+          '{"name":"authorization","value":"bearer"},' +
+          '{"name":"content-type","value":"application/x-www-form-urlencoded"},' +
+          '{"name":"Accept","value":"*/*"},' +
+          '{"name":"User-Agent","value":"Mozilla/5.0"},' +
+          '{"name":"x-twitter-auth-type","value":"OAuth2Session"},' +
+          '{"name":"x-twitter-active-user","value":"yes"}' +
+          "]"
+      ),
+    });
+
+    PronounState.tokens = {
+      bearerToken: Tokens.bearerToken,
+      csrfToken: Tokens.csrfToken,
+    };
+
+    expect(PronounState.ready).to.eql(true);
+  });
+
+  it("Filters users with pronouns", () => {
+    const users = [
+      {
+        handle: "GeopJr1312",
+        bio: "He/They/Any - Not a parent of 2",
+        id: "1",
+      },
+      {
+        handle: "jack",
+        bio: "#bitcoin",
+        id: "0",
+      },
+    ];
+    const usersWithPronouns = PronounHandler.havePronouns(users);
+    expect(usersWithPronouns[0].pronouns[0]).to.equal("he/they/any");
+  });
+
+  it("Capitalizes pronouns", () => {
+    const pronouns = "he/they/any"
+    const capializedPronouns = PronounHandler.capitalize(pronouns)
+    expect(capializedPronouns).to.equal("He/They/Any");
   });
 });
