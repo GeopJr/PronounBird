@@ -6,17 +6,27 @@
  * * * * * * * * * * * * * * * * * * * * */
 
 import PronounHandler from "./modules/pronounHandler";
+import ps from "./modules/pronounState";
 import Storage from "./modules/storage";
 import { idFlag, maxEntries } from "./config";
 
 // Get the twitter tokens
 PronounHandler.obtainTokens(handleDOMupdate);
 
-// This function gets initially called
-// after the tokens have been obtained
-function handleDOMupdate() {
-  // Clear storage
-  Storage.storageImplementation.clear();
+// Retry every 500ms until tokens are ready or
+// we reach 15 retries.
+if (!ps.ready) {
+  let retries = 0;
+  const tmpInterval = setInterval(function () {
+    if (retries > 15) clearInterval(tmpInterval);
+    if (ps.ready) {
+      PronounHandler.obtainTokens(handleDOMupdate);
+      clearInterval(tmpInterval);
+    }
+    retries += 1
+  }, 500);
+}
+
   // DOM observer that calls the pronounHandler functions
   // on change
   let observer = new MutationObserver((mutations) => {
@@ -60,9 +70,14 @@ function handleDOMupdate() {
       }
     }
   });
+
+// This function gets initially called
+// after the tokens have been obtained
+function handleDOMupdate() {
+  // Clear storage
+  Storage.storageImplementation.clear();
   observer.observe(document.body, { childList: true, subtree: true });
 }
-
 
 // Every 5 minutes, go through storage
 // if there are over the amount of max entries
@@ -75,6 +90,8 @@ setInterval(function () {
   Storage.get(null, (res) => {
     const saved = Object.keys(res);
     if (saved.length > maxEntries)
-      Storage.storageImplementation.remove(saved.slice(0, saved.length - maxEntries));
+      Storage.storageImplementation.remove(
+        saved.slice(0, saved.length - maxEntries)
+      );
   });
 }, 5 * 60 * 1000); // 5mins

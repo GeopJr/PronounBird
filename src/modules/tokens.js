@@ -90,6 +90,7 @@ export default class Tokens {
    */
   static messageListener(request, sender, response) {
     if (request.tokens) {
+      if (!Tokens.csrfToken) Tokens.initialCsrf();
       response({
         bearer: Tokens.bearerToken,
         csrf: Tokens.csrfToken,
