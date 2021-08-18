@@ -17,6 +17,16 @@
     "test": "xt-test",
     "clean": "xt-clean"
   },
+  "xtbuild": {
+    "scss_bundles": [
+      {
+        "src": [
+          "./src/**/*.scss"
+        ],
+        "name": "styles"
+      }
+    ]
+  },
   "babel": {
     "presets": [
       "@babel/preset-env"

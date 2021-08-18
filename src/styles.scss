@@ -1,0 +1,17 @@
+#uwu__awoo1312 {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  > div {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 25px;
+    margin: 0.3rem;
+    padding: 0.3rem;
+    color: white;
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif;
+  }
+}
