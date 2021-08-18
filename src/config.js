@@ -88,6 +88,14 @@ export const idFlag = "uwu__awoo1312";
 export const maxEntries = 5000;
 
 /**
+ * The max amount of retries when Twitter API errors
+ *
+ * @constant
+ * @type {number}
+ */
+export const maxRetries = 5;
+
+/**
  * A set of preset pronouns. Feel free to add any pronouns you want.
  * Pronouns are preset to avoid only_one_joke.
  * Most have been generated from loops that would put them on every
@@ -302,5 +310,5 @@ export const presetPronouns = [
   "it/any/she/they",
   "it/any/they/he",
   "it/any/they/she",
-  "he/vae"
+  "he/vae",
 ];
