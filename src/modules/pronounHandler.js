@@ -241,8 +241,6 @@ export default class PronounHandler {
           const parentDiv = document.createElement("div");
           // Set it as appended
           parentDiv.id = idFlag;
-          // // Parent CSS
-          // parentDiv.style.cssText = `display: inline-flex;flex-direction: row;flex-wrap: wrap;align-self: flex-start;`;
           // For each pronoun create a pill
           // and append to parent div
           for (let i = 0; i < pronouns.length; i++) {
@@ -253,7 +251,6 @@ export default class PronounHandler {
             newDiv.appendChild(newContent);
             // Pill CSS that uses the current twitter color theme
               newDiv.style.cssText = `background-color:${theme}`
-            // newDiv.style.cssText = `align-items: center;justify-content: center;display: flex;border-radius: 25px;margin: .3rem;padding: .3rem;background-color:${theme};color: white;font-family:TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif`;
             // Append to parent
             parentDiv.appendChild(newDiv);
           }

@@ -10,9 +10,9 @@ import { browserVariant } from "../config";
  * need to use them, through message passing.
  *
  * This module must run in background context because it is using webRequest
- * chrome API. "webRequest" permission is required in extension manifest.
- * Also permission to read the specified domain (twitter.com) is required
- * in manifest.
+ * and cookies APIs. "webRequest" & "cookies" permissions are required in
+ * extension manifest. Also permission to read the specified domain
+ * (twitter.com) is required in manifest.
  *
  * @module
  * @name Tokens
@@ -26,6 +26,8 @@ export default class Tokens {
    * token capture and message listener.
    */
   constructor() {
+    Tokens.initialCsrf();
+    browserVariant().cookies.onChanged.addListener(Tokens.getTheCookieTokens);
     browserVariant().webRequest.onBeforeSendHeaders.addListener(
       Tokens.getTheTokens,
       { urls: ["https://api.twitter.com/*"] },
@@ -62,6 +64,19 @@ export default class Tokens {
 
   /**
    * @static
+   * Temp CSRF token getter
+   * @returns {String|undefined}
+   */
+  static get tempCsrfToken() {
+    return this._tmpcsrf;
+  }
+
+  static set tempCsrfToken(value) {
+    this._tmpcsrf = value;
+  }
+
+  /**
+   * @static
    * @description
    * Handle incoming messages from other parts of the extension.
    * This module will respond to requests whose body is `{tokens: true}`
@@ -93,11 +108,46 @@ export default class Tokens {
         Tokens.bearerToken = header.value;
         return 1;
       case "x-csrf-token":
-        Tokens.csrfToken = header.value;
+        // If the csrf token from cookie is undefined/not there
+        // use the one from headers
+        if (Tokens.csrfToken) {
+          Tokens.tempCsrfToken = header.value;
+        } else {
+          Tokens.csrfToken = header.value;
+        }
         return 1;
       default:
         return 0;
     }
+  }
+
+  /**
+   * @static
+   * @description
+   * Get the initial csrf token from the cookie
+   * If this isn't available the header one will be
+   * used
+   */
+  static initialCsrf() {
+    browserVariant()
+      .cookies.get({ name: "ct0", url: ".twitter.com" })
+      .then((bisquit) => {
+        if (bisquit) Tokens.csrfToken = bisquit.value;
+      });
+  }
+
+  /**
+   * @static
+   * @description
+   * Capture the csrf token from the
+   * Cookies#onChanged listener
+   * @param {Object} details cookies object
+   */
+  static getTheCookieTokens(details) {
+    if (!details) return;
+    const bisquit = details.cookie;
+    if (bisquit.name !== "ct0") return;
+    if (details.cause === "overwrite") Tokens.csrfToken = bisquit.value;
   }
 
   /**

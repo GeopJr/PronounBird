@@ -19,7 +19,7 @@ function handleDOMupdate() {
   Storage.storageImplementation.clear();
   // DOM observer that calls the pronounHandler functions
   // on change
-  let observer = new MutationObserver(async (mutations) => {
+  let observer = new MutationObserver((mutations) => {
     for (let mutation of mutations) {
       for (const addedNode of mutation.addedNodes) {
         // If the node is [object Text] ignore, because Twitter:tm:
@@ -50,6 +50,7 @@ function handleDOMupdate() {
             for (let k = 0; k < users.length; k++) {
               if (!saved.includes(users[k])) uncommonUsers.push(users[k]);
             }
+
             // Go through requesting the bios only for the
             // non-yet-saved users
             PronounHandler.requestBios(uncommonUsers);

@@ -11,6 +11,7 @@
     "webRequest",
     "storage",
     "unlimitedStorage",
+    "cookies",
     "https://*.twitter.com/*"
   ],
   "icons": {
