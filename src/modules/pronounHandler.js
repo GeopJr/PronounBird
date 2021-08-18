@@ -201,7 +201,7 @@ export default class PronounHandler {
   static executeBlock() {
     // Get all saved pronouns
     return Storage.get(null, (res) => {
-      if (res.length === 0) return;
+      if (!res || Object.keys(res).length === 0) return;
       // Get all anchors in main
       const links = document.body
         .getElementsByTagName("main")[0]
@@ -223,9 +223,8 @@ export default class PronounHandler {
             continue;
           }
           // Get current color theme (from the compose button)
-          const theme = window.getComputedStyle(
-            document.querySelectorAll("[href='/compose/tweet']")[0]
-          ).backgroundColor;
+          const composeBtn = document.querySelectorAll("[href='/compose/tweet']")[0] || document.querySelectorAll("[aria-label='Compose Tweet']")[0]
+          const theme = composeBtn ? window.getComputedStyle(composeBtn).backgroundColor : "rgb(29, 161, 242)";;
           // CSS for the anchor
           // main point being setting flex to column if there are many
           // pronouns so it looks better
