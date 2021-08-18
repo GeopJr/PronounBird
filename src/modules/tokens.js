@@ -129,11 +129,12 @@ export default class Tokens {
    * used
    */
   static initialCsrf() {
-    browserVariant()
-      .cookies.get({ name: "ct0", url: ".twitter.com" })
-      .then((bisquit) => {
+    browserVariant().cookies.get(
+      { name: "ct0", url: "https://*.twitter.com/*" },
+      (bisquit) => {
         if (bisquit) Tokens.csrfToken = bisquit.value;
-      });
+      }
+    );
   }
 
   /**
@@ -141,7 +142,7 @@ export default class Tokens {
    * @description
    * Capture the csrf token from the
    * Cookies#onChanged listener
-   * @param {Object} details cookies object
+   * @param {Object} details changeInfo object
    */
   static getTheCookieTokens(details) {
     if (!details) return;

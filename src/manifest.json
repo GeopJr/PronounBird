@@ -30,7 +30,8 @@
     {
       "matches": ["https://*.twitter.com/*"],
       "js": ["content.js"],
-      "css": ["styles.css"]
+      "css": ["styles.css"],
+      "run_at": "document_end"
     }
   ],
   "chrome": {
