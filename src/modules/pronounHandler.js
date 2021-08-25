@@ -194,6 +194,28 @@ export default class PronounHandler {
   }
 
   /**
+   * Creates CSS variables of common
+   * colors
+   */
+  static createCSSVars() {
+    const composeBtn =
+      document.querySelectorAll("[href='/compose/tweet']")[0] ||
+      document.querySelectorAll("[aria-label='Compose Tweet']")[0];
+    const theme = composeBtn
+      ? window.getComputedStyle(composeBtn).backgroundColor
+      : "rgb(29, 161, 242)";
+    document.documentElement.style.setProperty("--uwu-twt-theme", theme);
+    const backgroundColor = window.getComputedStyle(
+      document.body
+    ).backgroundColor;
+    document.documentElement.style.setProperty("--uwu-twt-bg", backgroundColor);
+    const isWhite = backgroundColor === "rgb(255, 255, 255)";
+    document.documentElement.style.setProperty(
+      "--uwu-twt-text",
+      isWhite ? "black" : "white"
+    );
+  }
+  /**
    * Add pronouns in dom
    *
    * @returns {Promise}
