@@ -151,8 +151,8 @@ export default class PronounHandler {
     // people who use commas like they,them instead of slashes)
     const pronounSet = bio
       .toLowerCase()
-      .replace(/[^a-zA-Z \/,;]/g, "")
-      .split(/ |,|;/)
+      .replace(/[^a-zA-Z \/,;\n]/g, "")
+      .split(/ |,|;|\n/)
       .filter((x) => x.includes("/"));
 
     for (let i = 0; i < pronounSet.length; i++) {
