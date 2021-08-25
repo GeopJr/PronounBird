@@ -10,6 +10,9 @@ import ps from "./modules/pronounState";
 import Storage from "./modules/storage";
 import { idFlag, maxEntries } from "./config";
 
+// Create a modal used for multiple pronouns
+PronounHandler.createModal();
+
 // Get the twitter tokens
 PronounHandler.obtainTokens();
 
@@ -20,12 +23,12 @@ Storage.storageImplementation.clear();
 // on change
 let observer = new MutationObserver((mutations) => {
   PronounHandler.obtainTokens();
+  PronounHandler.createCSSVars();
   if (!ps.ready) return;
   for (let mutation of mutations) {
     for (const addedNode of mutation.addedNodes) {
-      // If the node is [object Text] ignore, because Twitter:tm:
-      if (Object.prototype.toString.call(addedNode) === "[object Text]")
-        continue;
+      // If the node has getElementsByTagName, because Twitter:tm:
+      if (typeof addedNode.getElementsByTagName !== "function") continue;
       // Get all anchors
       const links = addedNode.getElementsByTagName("a");
       const users = [];
@@ -35,7 +38,7 @@ let observer = new MutationObserver((mutations) => {
         // appended to yet
         if (
           PronounHandler.isHandleLink(links[n]) &&
-          links[n].querySelectorAll("#" + idFlag).length === 0
+          links[n].parentElement.querySelectorAll("#" + idFlag).length === 0
         ) {
           // add user handle
           users.push(PronounHandler.parseHandle(links[n]));

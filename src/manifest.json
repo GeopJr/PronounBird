@@ -23,8 +23,7 @@
     "512": "assets/512x512.png"
   },
   "background": {
-    "scripts": ["background.js"],
-    "persistent": true
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
