@@ -286,7 +286,7 @@ export default class PronounHandler {
         // Check if anchor is handle + hasnt been appended yet
         if (
           PronounHandler.isHandleLink(links[n]) &&
-          links[n].querySelectorAll("#" + idFlag).length === 0
+          links[n].parentElement.querySelectorAll("#" + idFlag).length === 0
         ) {
           const link = links[n];
           const handle = PronounHandler.parseHandle(link);
@@ -297,34 +297,55 @@ export default class PronounHandler {
           } else {
             continue;
           }
-          // Get current color theme (from the compose button)
-          const composeBtn = document.querySelectorAll("[href='/compose/tweet']")[0] || document.querySelectorAll("[aria-label='Compose Tweet']")[0]
-          const theme = composeBtn ? window.getComputedStyle(composeBtn).backgroundColor : "rgb(29, 161, 242)";;
-          // CSS for the anchor
-          // main point being setting flex to column if there are many
-          // pronouns so it looks better
-          link.style.cssText += `align-items: center;display: inline-flex;flex-direction: ${
-            pronouns.length > 1 ? "column" : "row"
-          };`;
-          // Pronoun pill handler
+          link.classList.add("uwu__link1312");
+          link.parentElement.classList.add("uwu__link1312");
           const parentDiv = document.createElement("div");
           // Set it as appended
           parentDiv.id = idFlag;
-          // For each pronoun create a pill
-          // and append to parent div
-          for (let i = 0; i < pronouns.length; i++) {
+          const pronTable = document.createElement("div");
+          pronTable.classList.add("uwu__hide1312");
+          pronTable.id = "uwu__pronList1312";
+
+          // Set button if multiple
+          for (let i = 0; i < 2; i++) {
+            if (i === 1 && pronouns.length === 1) break;
             const newDiv = document.createElement("div");
             const newContent = document.createTextNode(
-              PronounHandler.capitalize(pronouns[i])
+              i === 0 ? PronounHandler.capitalize(pronouns[0]) : "+"
             );
             newDiv.appendChild(newContent);
-            // Pill CSS that uses the current twitter color theme
-            newDiv.style.cssText = `background-color:${theme}`;
+            if (i === 1) {
+              newDiv.classList.add("uwu__plus1312");
+              newDiv.onclick = function (e) {
+                e.stopPropagation();
+                const table =
+                  link.parentElement.querySelector(".uwu__hide1312");
+                if (table) {
+                  const modal = document.getElementById("uwu__modal1312");
+                  modal.classList.add("uwu__show1312");
+                  document.getElementById("uwu__modalChips1312").innerHTML =
+                    table.innerHTML;
+                }
+              };
+            }
             // Append to parent
             parentDiv.appendChild(newDiv);
           }
+
+          // Skip first
+          for (let i = 1; i < pronouns.length; i++) {
+            const pronTableItem = document.createElement("div");
+            const pronTableItemContent = document.createTextNode(
+              PronounHandler.capitalize(pronouns[i])
+            );
+            pronTableItem.appendChild(pronTableItemContent);
+
+            pronTable.appendChild(pronTableItem);
+          }
+          if (pronouns.length > 1) parentDiv.appendChild(pronTable);
+
           // Append parent to anchor
-          link.appendChild(parentDiv);
+          link.parentElement.appendChild(parentDiv);
         }
       }
     });

@@ -1,17 +1,126 @@
-#uwu__awoo1312 {
+#uwu__awoo1312,
+#uwu__pronList1312,
+#uwu__modalChips1312 {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-self: flex-start;
+  align-self: center;
   > div {
+    background-color: var(--uwu-twt-theme);
     align-items: center;
     justify-content: center;
     display: flex;
     border-radius: 25px;
-    margin: 0.3rem;
-    padding: 0.3rem;
+    margin-left: 0.3rem;
+    &:not(:first-child) {
+      margin-left: 0.4rem;
+    }
+    padding: 0.15rem 0.4rem;
     color: white;
     font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
       Roboto, Helvetica, Arial, sans-serif;
+    font-weight: bold;
   }
+}
+
+.uwu__plus1312 {
+  border-radius: 50% !important;
+  min-width: 20px;
+  min-height: 20px;
+  padding-left: 0.2rem !important;
+  padding-right: 0.2rem !important;
+  cursor: pointer;
+  user-select: none;
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 100%;
+    height: 0;
+  }
+}
+
+#uwu__pronList1312 {
+  flex-direction: column;
+}
+
+.uwu__hide1312 {
+  display: none !important;
+  &.uwu__show1312 {
+    display: flex !important;
+  }
+}
+
+#uwu__modal1312 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10000;
+  background-color: rgba(black, 0.5);
+  #uwu__content1312 {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+      rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+    align-self: center;
+    padding: 16px;
+    border-radius: 25px;
+    margin: 5rem;
+    min-width: 200px;
+    max-width: 555px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--uwu-twt-bg);
+    > #uwu__modalChips1312 {
+      align-self: center;
+      overflow: auto;
+      justify-content: center;
+      > div {
+        pointer-events: none;
+        margin-top: 0.4rem;
+        margin-bottom: 0.4rem;
+      }
+    }
+    #uwu__topBar1312 {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 16px;
+      justify-content: space-between;
+      #uwu__close1312 {
+        cursor: pointer;
+        user-select: none;
+        display: inline-flex;
+        width: 31px;
+        height: 31px;
+        min-height: 31px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: var(--uwu-twt-theme);
+        color: white;
+        font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        font-weight: bolder;
+      }
+      #uwu__title1312 {
+        align-self: center;
+        display: block;
+        text-align: center;
+        font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        font-weight: bolder;
+        color: var(--uwu-twt-text);
+        font-size: large;
+      }
+    }
+  }
+}
+
+.uwu__link1312 {
+  align-items: center !important;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
 }
