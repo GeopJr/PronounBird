@@ -215,6 +215,59 @@ export default class PronounHandler {
       isWhite ? "black" : "white"
     );
   }
+
+  /**
+   * Creates the modal used
+   * for multiple pronouns
+   */
+  static createModal() {
+    const modal = document.createElement("div");
+    modal.id = "uwu__modal1312";
+    modal.classList.add("uwu__hide1312");
+
+    modal.onmousedown = function (e) {
+      if (e.currentTarget !== e.target) return;
+      modal.classList.remove("uwu__show1312");
+    };
+
+    document.onkeydown = function (e) {
+      if (e.key !== "Escape" || !modal.classList.contains("uwu__show1312"))
+        return;
+      modal.classList.remove("uwu__show1312");
+    };
+
+    const modalContent = document.createElement("div");
+    modalContent.id = "uwu__content1312";
+
+    const modalTopBar = document.createElement("div");
+    modalTopBar.id = "uwu__topBar1312";
+
+    const modalClose = document.createElement("div");
+    modalClose.id = "uwu__close1312";
+    modalClose.innerHTML = "<span>&#215;</span>";
+    modalClose.onmousedown = function () {
+      modal.classList.remove("uwu__show1312");
+    };
+    modalTopBar.prepend(modalClose);
+
+    const modalTitle = document.createElement("div");
+    modalTitle.id = "uwu__title1312";
+    modalTitle.innerHTML = "<span>More Pronouns</span>";
+    modalTopBar.append(modalTitle);
+
+    modalContent.prepend(modalTopBar);
+
+    const modalChips = document.createElement("div");
+    modalChips.id = "uwu__modalChips1312";
+    modalContent.append(modalChips);
+
+    modal.append(modalContent);
+    if (document.getElementById("uwu__modal1312")) {
+      document.body.removeChild(document.getElementById("uwu__modal1312"));
+    }
+    document.body.prepend(modal);
+  }
+
   /**
    * Add pronouns in dom
    *
