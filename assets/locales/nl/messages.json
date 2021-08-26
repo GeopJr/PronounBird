@@ -1,0 +1,11 @@
+{
+  "appName": {
+    "message": "PronounBird voor Twitter"
+  },
+  "appShortName": {
+    "message": "PronounBird"
+  },
+  "appDescription": {
+    "message": "Voeg automatisch de voorkeursaanspreekvormen van gebruikers toe op Twitter."
+  }
+}
