@@ -98,4 +98,28 @@ describe("Background script", () => {
         expect(resp.csrf, "get csrf").to.equal("csrf")
     );
   });
+
+  it("Finds bearer and csrf from request headers while ct0 is undefined", () => {
+    // good request headers
+    Tokens.getTheTokens({
+      requestHeaders: JSON.parse(
+        "[" +
+          '{"name":"x-twitter-client-language","value":"en"},' +
+          '{"name":"x-csrf-token","value":"csrf"},' +
+          '{"name":"sec-ch-ua-mobile","value":"?0"},' +
+          '{"name":"authorization","value":"bearer"},' +
+          '{"name":"content-type","value":"application/x-www-form-urlencoded"},' +
+          '{"name":"Accept","value":"*/*"},' +
+          '{"name":"User-Agent","value":"Mozilla/5.0"},' +
+          '{"name":"x-twitter-auth-type","value":"OAuth2Session"},' +
+          '{"name":"x-twitter-active-user","value":"yes"}' +
+          "]"
+      ),
+    });
+
+    const csrf = Tokens.csrfToken;
+    const bearer = Tokens.bearerToken;
+    expect(bearer, "bearer found after good headers").to.equal("bearer");
+    expect(csrf, "csrf found after good headers").to.equal("csrf");
+  });
 });

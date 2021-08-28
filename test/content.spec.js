@@ -9,21 +9,24 @@ describe("Content script", () => {
   beforeEach(() => {
     const dom = new JSDOM(
       `<html>
-            <body>
-            <a id="test_anchor" href="/GeopJr1312" role="link" class="css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-dnmrzs r-1ny4l3l">
-            <div class="css-1dbjc4n r-1awozwy r-18u37iz r-1wbh5a2 r-dnmrzs r-1ny4l3l" id="id__muw2h9corh">
-            <div class="css-1dbjc4n r-1awozwy r-18u37iz r-dnmrzs">
-            <div dir="auto" class="css-901oao css-bfa6kz r-1awozwy r-jwli3a r-6koalj r-37j5jr r-a023e6 r-b88u0q r-rjixqe r-bcqeeo r-1udh08x r-3s2u2q r-qvutc0"><span class="css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">
-            <span class="css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">
+            <body style="background-color:red">
+            <a role="link">
+            <div>
+            <div>
+            <div dir="auto"><span>
+            <span>
             GeopJr
             </span></span></div>
-            <div dir="auto" class="css-901oao r-jwli3a r-xoduu5 r-18u37iz r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0"></div>
+            <div dir="auto"></div>
             </div>
-            <div class="css-1dbjc4n r-18u37iz r-1wbh5a2 r-13hce6t">
-            <div dir="ltr" class="css-901oao css-bfa6kz r-111h2gw r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0"><span class="css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">
+            <div>
+            <div dir="ltr">
+            <span>
             @GeopJr1312
             </span></div></div></div>
             </a>
+            <a href="/compose/tweet" aria-label="Tweet" role="link" style="background-color:red"></a>
+            <a id="test_anchor" href="/GeopJr1312" role="link">
             </body>
         </html>`,
       { url: "http://localhost" }
@@ -143,8 +146,105 @@ describe("Content script", () => {
   });
 
   it("Capitalizes pronouns", () => {
-    const pronouns = "he/they/any"
-    const capializedPronouns = PronounHandler.capitalize(pronouns)
+    const pronouns = "he/they/any";
+    const capializedPronouns = PronounHandler.capitalize(pronouns);
     expect(capializedPronouns).to.equal("He/They/Any");
+  });
+
+  it("Sets some CSS vars", () => {
+    PronounHandler.createCSSVars();
+    const vars = window.getComputedStyle(document.documentElement);
+
+    expect(vars.getPropertyValue("--uwu-twt-theme")).to.equal("red");
+    expect(vars.getPropertyValue("--uwu-twt-bg")).to.equal("red");
+    expect(vars.getPropertyValue("--uwu-twt-text")).to.equal("white");
+  });
+
+  it("Creates modal", () => {
+    PronounHandler.createModal();
+    const ids = [
+      "uwu__modalChips1312",
+      "uwu__modal1312",
+      "uwu__title1312",
+      "uwu__close1312",
+      "uwu__topBar1312",
+      "uwu__content1312",
+    ];
+    let elements = [];
+    for (let i = 0; i < ids.length; i++) {
+      elements.push(!document.getElementById(ids[i]));
+    }
+
+    elements = elements.filter((x) => x);
+    expect(elements.length).to.equal(0);
+  });
+
+  it("Removes previous modal", () => {
+    PronounHandler.createModal();
+
+    PronounHandler.createModal();
+
+    expect(document.getElementsByClassName("uwu__hide1312").length).to.equal(1);
+  });
+
+  it("Closes modal on click", () => {
+    PronounHandler.createModal();
+
+    // Show the modal
+    const modal = document.getElementById("uwu__modal1312");
+
+    // click
+    modal.classList.add("uwu__show1312");
+
+    modal.dispatchEvent(
+      new MouseEvent("mousedown", {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+
+    expect(document.getElementsByClassName("uwu__show1312").length).to.equal(0);
+
+    // keyboard
+    modal.classList.add("uwu__show1312");
+
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        key: "Escape",
+      })
+    );
+
+    expect(document.getElementsByClassName("uwu__show1312").length).to.equal(0);
+
+    // click "x" button
+    modal.classList.add("uwu__show1312");
+
+    document.getElementById("uwu__close1312").dispatchEvent(
+      new MouseEvent("mousedown", {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+
+    expect(document.getElementsByClassName("uwu__show1312").length).to.equal(0);
+
+    // keyboard wrong button
+    modal.classList.add("uwu__show1312");
+
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        key: "Shift",
+      })
+    );
+
+    expect(document.getElementsByClassName("uwu__show1312").length).to.equal(1);
   });
 });
