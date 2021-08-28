@@ -16,7 +16,7 @@
     "sync": "xt-sync",
     "test": "xt-test",
     "clean": "xt-clean",
-    "source": "zip -r source.zip package.json pnpm-lock.yml .npmrc .firefox.json .chromium.json .eslintrc.json ./src ./assets"
+    "source": "zip -r source.zip package.json pnpm-lock.yaml .npmrc .firefox.json .chromium.json .eslintrc.json ./src ./assets"
   },
   "xtbuild": {
     "scss_bundles": [
