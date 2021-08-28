@@ -91,6 +91,7 @@ export default class PronounHandler {
         PronounHandler.processBios(userData);
       },
       () => {
+        PronounHandler.obtainTokens();
         requestBios(handleList, retry + 1);
       }
     );
@@ -244,7 +245,7 @@ export default class PronounHandler {
 
     const modalClose = document.createElement("div");
     modalClose.id = "uwu__close1312";
-    modalClose.innerHTML = "<span>&#215;</span>";
+    modalClose.appendChild(document.createTextNode("×"));
     modalClose.onmousedown = function () {
       modal.classList.remove("uwu__show1312");
     };
@@ -252,7 +253,7 @@ export default class PronounHandler {
 
     const modalTitle = document.createElement("div");
     modalTitle.id = "uwu__title1312";
-    modalTitle.innerHTML = "<span>More Pronouns</span>";
+    modalTitle.appendChild(document.createTextNode("More Pronouns"));
     modalTopBar.append(modalTitle);
 
     modalContent.prepend(modalTopBar);
@@ -310,10 +311,6 @@ export default class PronounHandler {
           for (let i = 0; i < 2; i++) {
             if (i === 1 && pronouns.length === 1) break;
             const newDiv = document.createElement("div");
-            const newContent = document.createTextNode(
-              i === 0 ? PronounHandler.capitalize(pronouns[0]) : "+"
-            );
-            newDiv.appendChild(newContent);
             if (i === 1) {
               newDiv.classList.add("uwu__plus1312");
               newDiv.onclick = function (e) {
@@ -323,10 +320,14 @@ export default class PronounHandler {
                 if (table) {
                   const modal = document.getElementById("uwu__modal1312");
                   modal.classList.add("uwu__show1312");
-                  document.getElementById("uwu__modalChips1312").innerHTML =
-                    table.innerHTML;
+                  document.getElementById("uwu__modalChips1312").append(...table.childNodes)
                 }
               };
+            } else {
+              const newContent = document.createTextNode(
+                PronounHandler.capitalize(pronouns[0])
+              );
+              newDiv.appendChild(newContent);
             }
             // Append to parent
             parentDiv.appendChild(newDiv);
