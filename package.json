@@ -15,7 +15,8 @@
     "build:ff": "xt-build -e prod -c .firefox.json -p firefox",
     "sync": "xt-sync",
     "test": "xt-test",
-    "clean": "xt-clean"
+    "clean": "xt-clean",
+    "source": "zip -r source.zip package.json pnpm-lock.yml .npmrc .firefox.json .chromium.json .eslintrc.json ./src ./assets"
   },
   "xtbuild": {
     "scss_bundles": [
