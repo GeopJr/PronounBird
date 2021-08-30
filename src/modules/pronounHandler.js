@@ -319,8 +319,10 @@ export default class PronounHandler {
                   link.parentElement.querySelector(".uwu__hide1312");
                 if (table) {
                   const modal = document.getElementById("uwu__modal1312");
+                  const chips = document.getElementById("uwu__modalChips1312");
                   modal.classList.add("uwu__show1312");
-                  document.getElementById("uwu__modalChips1312").append(...table.childNodes)
+                  chips.textContent = "";
+                  chips.append(...table.childNodes);
                 }
               };
             } else {
