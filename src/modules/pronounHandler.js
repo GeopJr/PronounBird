@@ -291,66 +291,66 @@ export default class PronounHandler {
         )
           continue;
 
-          const link = links[n];
-          const handle = PronounHandler.parseHandle(link);
-          let pronouns;
-          // If handle is in storage
-          if (res.hasOwnProperty(handle)) {
-            pronouns = res[handle];
-          } else {
-            continue;
-          }
-          link.classList.add("uwu__link1312");
-          link.parentElement.classList.add("uwu__link1312");
-          const parentDiv = document.createElement("div");
-          // Set it as appended
+        const link = links[n];
+        const handle = PronounHandler.parseHandle(link);
+        let pronouns;
+        // If handle is in storage
+        if (res.hasOwnProperty(handle)) {
+          pronouns = res[handle];
+        } else {
+          continue;
+        }
+        link.classList.add("uwu__link1312");
+        link.parentElement.classList.add("uwu__link1312");
+        const parentDiv = document.createElement("div");
+        // Set it as appended
         parentDiv.id = "uwu__awoo1312";
-          const pronTable = document.createElement("div");
-          pronTable.classList.add("uwu__hide1312");
-          pronTable.id = "uwu__pronList1312";
-
-          // Set button if multiple
-          for (let i = 0; i < 2; i++) {
-            if (i === 1 && pronouns.length === 1) break;
-            const newDiv = document.createElement("div");
-            if (i === 1) {
-              newDiv.classList.add("uwu__plus1312");
-              newDiv.onclick = function (e) {
-                e.stopPropagation();
-                const table =
-                  link.parentElement.querySelector(".uwu__hide1312");
-                if (table) {
-                  const modal = document.getElementById("uwu__modal1312");
-                  const chips = document.getElementById("uwu__modalChips1312");
-                  modal.classList.add("uwu__show1312");
-                  chips.textContent = "";
-                  chips.append(...table.childNodes);
-                }
-              };
-            } else {
-              const newContent = document.createTextNode(
-                PronounHandler.capitalize(pronouns[0])
-              );
-              newDiv.appendChild(newContent);
-            }
-            // Append to parent
-            parentDiv.appendChild(newDiv);
-          }
-
-          // Skip first
-          for (let i = 1; i < pronouns.length; i++) {
-            const pronTableItem = document.createElement("div");
-            const pronTableItemContent = document.createTextNode(
-              PronounHandler.capitalize(pronouns[i])
+        const pronTable = document.createElement("div");
+        pronTable.classList.add("uwu__hide1312");
+        pronTable.classList.add("uwu__pronList1312");
+        // Set button if multiple
+        for (let i = 0; i < 2; i++) {
+          if (i === 1 && pronouns.length === 1) break;
+          const newDiv = document.createElement("div");
+          if (i === 1) {
+            newDiv.classList.add("uwu__plus1312");
+            newDiv.onclick = function (e) {
+              e.stopPropagation();
+              const table = link.parentElement
+                .querySelector(".uwu__pronList1312")
+                .cloneNode(true);
+              if (table) {
+                const modal = document.getElementById("uwu__modal1312");
+                const chips = document.getElementById("uwu__modalChips1312");
+                chips.textContent = "";
+                chips.append(...table.childNodes);
+                modal.classList.add("uwu__show1312");
+              }
+            };
+          } else {
+            const newContent = document.createTextNode(
+              PronounHandler.capitalize(pronouns[0])
             );
-            pronTableItem.appendChild(pronTableItemContent);
-
-            pronTable.appendChild(pronTableItem);
+            newDiv.appendChild(newContent);
           }
-          if (pronouns.length > 1) parentDiv.appendChild(pronTable);
+          // Append to parent
+          parentDiv.appendChild(newDiv);
+        }
 
-          // Append parent to anchor
-          link.parentElement.appendChild(parentDiv);
+        // Skip first
+        for (let i = 1; i < pronouns.length; i++) {
+          const pronTableItem = document.createElement("div");
+          const pronTableItemContent = document.createTextNode(
+            PronounHandler.capitalize(pronouns[i])
+          );
+          pronTableItem.appendChild(pronTableItemContent);
+
+          pronTable.appendChild(pronTableItem);
+        }
+        if (pronouns.length > 1) parentDiv.appendChild(pronTable);
+
+        // Append parent to anchor
+        link.parentElement.appendChild(parentDiv);
       }
     });
   }
