@@ -8,7 +8,7 @@
 import PronounHandler from "./modules/pronounHandler";
 import ps from "./modules/pronounState";
 import Storage from "./modules/storage";
-import { idFlag, maxEntries } from "./config";
+import { maxEntries } from "./config";
 
 // Create a modal used for multiple pronouns
 PronounHandler.createModal();
@@ -38,7 +38,7 @@ let observer = new MutationObserver((mutations) => {
         // appended to yet
         if (
           PronounHandler.isHandleLink(links[n]) &&
-          links[n].parentElement.querySelectorAll("#" + idFlag).length === 0
+          links[n].parentElement.querySelectorAll("#uwu__awoo1312").length === 0
         ) {
           // add user handle
           users.push(PronounHandler.parseHandle(links[n]));

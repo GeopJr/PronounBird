@@ -1,4 +1,4 @@
-import { browserVariant, idFlag, presetPronouns, maxRetries } from "../config";
+import { browserVariant, presetPronouns, maxRetries } from "../config";
 import Storage from "./storage";
 import TwitterApi from "./twitterApi";
 import ps from "./pronounState";
@@ -286,9 +286,11 @@ export default class PronounHandler {
       for (let n = 0; n < links.length; n++) {
         // Check if anchor is handle + hasnt been appended yet
         if (
-          PronounHandler.isHandleLink(links[n]) &&
-          links[n].parentElement.querySelectorAll("#" + idFlag).length === 0
-        ) {
+          !PronounHandler.isHandleLink(links[n]) ||
+          links[n].parentElement.querySelectorAll("#uwu__awoo1312").length !== 0
+        )
+          continue;
+
           const link = links[n];
           const handle = PronounHandler.parseHandle(link);
           let pronouns;
@@ -302,7 +304,7 @@ export default class PronounHandler {
           link.parentElement.classList.add("uwu__link1312");
           const parentDiv = document.createElement("div");
           // Set it as appended
-          parentDiv.id = idFlag;
+        parentDiv.id = "uwu__awoo1312";
           const pronTable = document.createElement("div");
           pronTable.classList.add("uwu__hide1312");
           pronTable.id = "uwu__pronList1312";
@@ -349,7 +351,6 @@ export default class PronounHandler {
 
           // Append parent to anchor
           link.parentElement.appendChild(parentDiv);
-        }
       }
     });
   }

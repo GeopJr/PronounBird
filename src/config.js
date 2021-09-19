@@ -68,15 +68,15 @@ export const isChrome = !(isEdge || isOpera || isFirefox || isSafari);
  */
 export const browserVariant = (_) => (isFirefox ? browser : window.chrome);
 
-/**
- * Flag for marking appended DOM elements. This value can be anything,
- * but it needs to be sufficiently unique so it doesn't clash with
- * actual class names.
- *
- * @constant
- * @type {String}
- */
-export const idFlag = "uwu__awoo1312";
+// /**
+//  * Flag for marking appended DOM elements. This value can be anything,
+//  * but it needs to be sufficiently unique so it doesn't clash with
+//  * actual class names.
+//  *
+//  * @constant
+//  * @type {String}
+//  */
+// export const idFlag = "uwu__awoo1312";
 
 /**
  * The max amount of entries allowed in storage at one time
