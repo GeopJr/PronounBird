@@ -28,7 +28,6 @@ PronounBird is a browser extension for Twitter that automatically parses user bi
 
 <p align="center">
   <img src="https://i.imgur.com/88AlJLI.png" alt="Screenshot showing a browser with PronounBird having appended the user's pronouns on a post" /><br/>
-  <img src="https://i.imgur.com/XQlpzU0.png" alt="Screenshot showing PronounBird having appended the users' pronouns on a post and a reply" />
 </p>
 
 #
