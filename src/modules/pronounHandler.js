@@ -57,7 +57,9 @@ export default class PronounHandler {
         // contains "@" of handle
         link.innerText.lastIndexOf("@") >= 0 &&
         // is not a "X Retweeted" anchor
-        !link.innerText.endsWith(" Retweeted")
+        !link.innerText.endsWith(" Retweeted") &&
+        // is not a list
+        !link.href.includes("/lists/")
       )
     );
   }
