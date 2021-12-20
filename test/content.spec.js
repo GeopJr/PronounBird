@@ -132,23 +132,31 @@ describe("Content script", () => {
     const users = [
       {
         handle: "GeopJr1312",
-        bio: "He/They/Any - Not a parent of 2",
+        bio: "They/Any - Not a parent of 2",
         id: "1",
+        location: "",
       },
       {
         handle: "jack",
         bio: "#bitcoin",
         id: "0",
+        location: "",
+      },
+      {
+        handle: "JKRollingStonesTERF",
+        location: "They/Them",
+        id: "2",
+        bio: "",
       },
     ];
     const usersWithPronouns = PronounHandler.havePronouns(users);
-    expect(usersWithPronouns[0].pronouns[0]).to.equal("he/they/any");
+    expect(usersWithPronouns[0].pronouns[0]).to.equal("they/any");
   });
 
   it("Capitalizes pronouns", () => {
-    const pronouns = "he/they/any";
+    const pronouns = "they/any";
     const capializedPronouns = PronounHandler.capitalize(pronouns);
-    expect(capializedPronouns).to.equal("He/They/Any");
+    expect(capializedPronouns).to.equal("They/Any");
   });
 
   it("Sets some CSS vars", () => {

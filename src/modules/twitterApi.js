@@ -21,12 +21,13 @@ export default class TwitterApi {
    * @param name - user's display name
    * @returns {{name: string, bio: string, handle: string, id: string}}
    */
-  static mapUser({ description, screen_name, id_str, name }) {
+  static mapUser({ description, screen_name, id_str, name, location }) {
     return {
-      bio: description,
+      bio: description ?? "",
       id: id_str,
-      name: name,
+      name: name ?? "",
       handle: screen_name,
+      location: location ?? "",
     };
   }
 

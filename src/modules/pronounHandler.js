@@ -122,10 +122,11 @@ export default class PronounHandler {
     const usersWithPronouns = [];
     // For each user...
     for (let i = 0; i < users.length; i++) {
-      const { bio, id } = users[i];
+      const { bio, id, location } = users[i];
       // ...that has both an id and a bio
-      if (!id || !bio) continue;
-      const pronouns = PronounHandler.checkWords(bio);
+      if (!id || (!bio && !location)) continue;
+      let pronouns = PronounHandler.checkWords(bio);
+      if (pronouns == 0) pronouns = PronounHandler.checkWords(location);
       // If they have pronouns
       if (pronouns.length > 0) {
         // Add them to their user object ([] of String)
