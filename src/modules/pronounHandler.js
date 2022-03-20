@@ -305,6 +305,16 @@ export default class PronounHandler {
         }
         link.classList.add("uwu__link1312");
         link.parentElement.classList.add("uwu__link1312");
+        if (
+          link.parentElement.parentElement.parentElement &&
+          link.parentElement.parentElement.parentElement.id.startsWith("id_") &&
+          !link.parentElement.parentElement.parentElement.classList.contains(
+            "uwu__vater1312"
+          )
+        )
+          link.parentElement.parentElement.parentElement.classList.add(
+            "uwu__vater1312"
+          );
         const parentDiv = document.createElement("div");
         // Set it as appended
         parentDiv.id = "uwu__awoo1312";

@@ -37,7 +37,7 @@
     content: "+";
     display: inline-flex;
     // Usually 19 - 20
-    max-width:19px;
+    max-width: 19px;
     justify-content: center;
   }
 }
@@ -124,5 +124,13 @@
   align-items: center !important;
   display: inline-flex !important;
   flex-direction: row !important;
+  // flex-wrap: wrap !important;
+}
+
+.uwu__vater1312 {
   flex-wrap: wrap !important;
+  column-gap: 4px !important;
+  > div {
+    margin-left: 0px !important;
+  }
 }
