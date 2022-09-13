@@ -144,6 +144,7 @@ export default class PronounHandler {
    */
   static checkWords(bio) {
     const pronouns = [];
+    if (!bio) return pronouns;
     // Lowercase, clean (remove any non latin characters,
     // special characters (other than space, slash, comma and ;))
     // split on slash and comma (to match more ways people list
