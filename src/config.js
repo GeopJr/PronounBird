@@ -324,4 +324,12 @@ export const presetPronouns = [
   "xe/xyr",
   "tey/tem",
   "xey/xem",
+  "any/all",
+  "all/any",
+  "it/she/xey",
+  "it/xey/she",
+  "xey/it/she",
+  "xey/she/it",
+  "she/it/xey",
+  "she/xey/it",
 ];
