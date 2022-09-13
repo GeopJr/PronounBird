@@ -154,8 +154,8 @@ export default class PronounHandler {
     // Note: this might lead to other problems and im open to
     // suggestions. (problems include: non latin characters,
     // people who use commas like they,them instead of slashes)
-    const pronounSet = bio
-      .toLowerCase()
+    const lowercasedBio = bio.toLowerCase()
+    const pronounSet = lowercasedBio
       .replace(/[^a-zA-Z \/,;\n]/g, "")
       .split(/ |,|;|\n/)
       .filter((x) => x.includes("/"));
@@ -165,6 +165,15 @@ export default class PronounHandler {
       // the preset and add if true
       if (presetPronouns.includes(pronounSet[i])) {
         pronouns.push(pronounSet[i]);
+      }
+    }
+
+    // Special case for "All Pronouns" and "Any Pronouns"
+    const anyAll = lowercasedBio.match(/(^|[^a-z0-9])(any|all) pronouns/)
+    if (anyAll && anyAll.length > 0) {
+      const lastItem = anyAll[anyAll.length - 1]
+      if (lastItem && ["any", "all"].includes(lastItem)) {
+        pronouns.push(`${PronounHandler.capitalize(lastItem)} Pronouns`)
       }
     }
 

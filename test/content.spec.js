@@ -50,6 +50,15 @@ describe("Content script", () => {
         "Talk to me about k8s [they/them, she/her,it/its]"
       )
     ).to.eql(["they/them", "she/her", "it/its"]);
+    expect(PronounHandler.checkWords("Hatsune Miku stan!! any pronouns")).to.eql([
+      "Any Pronouns",
+    ]);
+    expect(PronounHandler.checkWords("[all pronouns] Awoooo")).to.eql([
+      "All Pronouns",
+    ]);
+    expect(PronounHandler.checkWords("I don't have pronouns")).to.eql([]);
+    expect(PronounHandler.checkWords("many pronouns")).to.eql([]);
+    expect(PronounHandler.checkWords(null)).to.eql([]);
   });
 
   it("Checks if anchor is handle", () => {
