@@ -1,5 +1,15 @@
+# DISCONTINUED
+
+This addon's purpose was to add pronouns next to usernames **until Twitter added this feature themselves**. Clearly there's no plans for that anymore.
+
+Delete your Twitter account, join the [Fediverse](https://fediverse.info/)! We don't tolerate fascists, nobody owns it & there's no ads or algorithms!
+
+Thanks for using PronounBird!
+
+#
+
 <p align="center">
-  <img alt="DoucheBlock for Twitter" src="./assets/icon.svg" width="128" />
+  <img alt="PronounBird for Twitter" src="./assets/icon.svg" width="128" />
 </p>
 <h1 align="center">PronounBird for Twitter</h1>
 <p align="center">
